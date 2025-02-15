@@ -62,14 +62,15 @@ struct OnboardingView: View {
             VStack {
                 
                 TabView(selection: $selection) {
-                    ForEach(pages.indices, id: \.self) { index in
-                        RegularOnboardingView(
-                            page: pages[index],
-                            shouldShowOnboarding: $shouldShowOnboarding,
-                            selection: $selection,
-                            maxPageNumber: maxPageNumber
-                        )
-                    }
+                    OnboardingVideoView()
+//                    ForEach(pages.indices, id: \.self) { index in
+//                        RegularOnboardingView(
+//                            page: pages[index],
+//                            shouldShowOnboarding: $shouldShowOnboarding,
+//                            selection: $selection,
+//                            maxPageNumber: maxPageNumber
+//                        )
+//                    }
                 }
                 .tabViewStyle(.page)
             }
