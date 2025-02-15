@@ -17,11 +17,13 @@ struct OnboardingDescriptionView: View {
     var body: some View {
         VStack(alignment: .center) {
             Text(title)
+                .multilineTextAlignment(.center)
                 .foregroundStyle(.white)
                 .font(.largeTitle)
                 .fontWeight(.semibold)
             
             Text(description)
+                .multilineTextAlignment(.center)
                 .foregroundStyle(.white)
                 .font(.body)
             
@@ -35,7 +37,7 @@ struct OnboardingDescriptionView: View {
                     .foregroundStyle(.white)
                     .cornerRadius(24)
             }
-            .padding(EdgeInsets(top: 8, leading: 12, bottom: 38, trailing: 12))
+            .padding(EdgeInsets(top: 8, leading: 12, bottom: 28, trailing: 12))
         }
     }
     
