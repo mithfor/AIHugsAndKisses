@@ -8,11 +8,9 @@ import SwiftUI
 
 struct RegularOnboardingView: View {
     
-    let image: String
-    let title: String
-    let description: String
+    let page: OnboardingPage
+    
     @Binding var shouldShowOnboarding: Bool
-    var isDismissEnabled: Bool = false
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -22,18 +20,31 @@ struct RegularOnboardingView: View {
             VStack(alignment: .center) {
                 
                 GeometryReader { proxy in
-                    Image(image)
+                    Image(page.imageName)
                         .resizable()
-                        .scaledToFill()
+                        .scaledToFit()
                         .frame(width: proxy.size.width, height: proxy.size.height * 3 / 2)
                 }
                 
                 
                 OnboardingDescriptionView(
-                    title: title,
-                    description: description,
-                    isDismissEnabled: isDismissEnabled,
-                    shouldShowOnboarding: .constant(shouldShowOnboarding))
+                    title: page.title,
+                    description: page.description
+                )
+                
+                Button {
+                    page.isDismissEnabled ? shouldShowOnboarding.toggle() : print("Next tapped")
+                }
+                label: {
+                    Text(page.isDismissEnabled ? "Get Started" : "Next")
+                        .frame(maxWidth: .infinity, maxHeight: 48)
+                        .font(.title3)
+                        .background(Color.button)
+                        .font(.body)
+                        .foregroundStyle(.white)
+                        .cornerRadius(24)
+                }
+                .padding(EdgeInsets(top: 8, leading: 12, bottom: 28, trailing: 12))
             }
             .padding()
             .frame(maxWidth: .infinity)
@@ -44,8 +55,13 @@ struct RegularOnboardingView: View {
 }
 
 #Preview {
-    RegularOnboardingView(image: MockOnboardingModel.image,
-                          title: MockOnboardingModel.title,
-                          description: MockOnboardingModel.description,
-                          shouldShowOnboarding: .constant(true))
+    RegularOnboardingView(
+        page: OnboardingPage(
+            id: 0,
+            imageName: MockOnboardingPage.imageName,
+            title: MockOnboardingPage.title,
+            description: MockOnboardingPage.description,
+            isDismissEnabled: false),
+            shouldShowOnboarding: .constant(true)
+    )
 }

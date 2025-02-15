@@ -10,8 +10,7 @@ import SwiftUI
 struct AppContentView: View {
     var body: some View {
         
-        @AppStorage("shouldShowOnboarding") var shouldShowOnboarding = true
-        
+        @AppStorage("__shouldShowOnboarding") var shouldShowOnboarding = true
         
         ZStack {
             
