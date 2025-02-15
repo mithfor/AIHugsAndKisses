@@ -12,6 +12,9 @@ struct OnboardingDescriptionView: View {
     let title: String
     let description: String
     
+    var isDismissEnabled: Bool
+    @Binding var shouldShowOnboarding: Bool
+    
     private let viewMetrics: ViewMetrics = ViewMetrics()
     
     var body: some View {
@@ -27,9 +30,11 @@ struct OnboardingDescriptionView: View {
                 .foregroundStyle(.white)
                 .font(.body)
             
-            Button {}
+            Button {
+                isDismissEnabled ? shouldShowOnboarding.toggle() : print("Next tapped")
+            }
             label: {
-                Text("Next")
+                Text(isDismissEnabled ? "Get Started" : "Next")
                     .frame(maxWidth: .infinity, maxHeight: 48)
                     .font(.title3)
                     .background(Color.button)
@@ -48,6 +53,8 @@ struct OnboardingDescriptionView: View {
 }
 
 #Preview {
-    OnboardingDescriptionView(title: "TITLEtitle",
-                          description: "Description")
+    OnboardingDescriptionView(title: "TITLE",
+                          description: "Description",
+                              isDismissEnabled: true, shouldShowOnboarding: .constant(true)
+    )
 }

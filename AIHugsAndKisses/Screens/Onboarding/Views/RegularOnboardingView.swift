@@ -11,6 +11,8 @@ struct RegularOnboardingView: View {
     let image: String
     let title: String
     let description: String
+    @Binding var shouldShowOnboarding: Bool
+    var isDismissEnabled: Bool = false
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -24,13 +26,14 @@ struct RegularOnboardingView: View {
                         .resizable()
                         .scaledToFill()
                         .frame(width: proxy.size.width, height: proxy.size.height * 3 / 2)
-
                 }
                 
                 
-                OnboardingDescriptionView(title: title, description: description)
-                
-
+                OnboardingDescriptionView(
+                    title: title,
+                    description: description,
+                    isDismissEnabled: isDismissEnabled,
+                    shouldShowOnboarding: .constant(shouldShowOnboarding))
             }
             .padding()
             .frame(maxWidth: .infinity)
@@ -43,5 +46,6 @@ struct RegularOnboardingView: View {
 #Preview {
     RegularOnboardingView(image: MockOnboardingModel.image,
                           title: MockOnboardingModel.title,
-                          description: MockOnboardingModel.description)
+                          description: MockOnboardingModel.description,
+                          shouldShowOnboarding: .constant(true))
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct AppContentView: View {
     var body: some View {
         
-        @AppStorage("isOnboardingShowing") var isOnboardingShowing = true
+        @AppStorage("shouldShowOnboarding") var shouldShowOnboarding = true
         
         
         ZStack {
@@ -22,11 +22,10 @@ struct AppContentView: View {
                     .foregroundStyle(.white)
             }
             .offset(y: 0)
-            .fullScreenCover(isPresented: $isOnboardingShowing) {
-                isOnboardingShowing = false
+            .fullScreenCover(isPresented: $shouldShowOnboarding) {
                 MainView()
             } content: {
-                OnboardingView()
+                OnboardingView(shouldShowOnboarding: $shouldShowOnboarding)
             }
 
         }

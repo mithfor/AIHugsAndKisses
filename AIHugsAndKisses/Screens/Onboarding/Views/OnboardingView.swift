@@ -8,27 +8,47 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    
+    @Binding var shouldShowOnboarding: Bool
     var body: some View {
         ZStack(alignment: .topLeading) {
             
             Color.primary.ignoresSafeArea()
             
             TabView {
-                RegularOnboardingView(image: "onboardingImage-1",
-                                      title: "Popular Effects",
-                                      description: "Start creating your masterpieces")
-                RegularOnboardingView(image: "onboardingImage-2",
-                                      title: "Try a new one",
-                                      description: "Create creative videos right in the app")
-                RegularOnboardingView(image: "onboardingImage-3",
-                                      title: "Create moments",
-                                      description: "The whole story will be at your fingertips at any moment")
-                RegularOnboardingView(image: "onboardingImage-4",
-                                      title: "Rate our App in the AppStore",
-                                      description: "Lots of satisfied users")
-                RegularOnboardingView(image: "onboardingImage-5",
-                                      title: "Don't miss new trends",
-                                      description: "Allow notifications")
+                RegularOnboardingView(
+                    
+                    image: "onboardingImage-1",
+                    title: "Popular Effects",
+                    description: "Start creating your masterpieces",
+                    shouldShowOnboarding: $shouldShowOnboarding
+                )
+                RegularOnboardingView(
+                    image: "onboardingImage-2",
+                    title: "Try a new one",
+                    description: "Create creative videos right in the app",
+                    shouldShowOnboarding: $shouldShowOnboarding
+                )
+                    
+                RegularOnboardingView(
+                    image: "onboardingImage-3",
+                    title: "Create moments",
+                    description: "The whole story will be at your fingertips at any moment",
+                    shouldShowOnboarding: $shouldShowOnboarding
+                )
+                RegularOnboardingView(
+                    image: "onboardingImage-4",
+                    title: "Rate our App in the AppStore",
+                    description: "Lots of satisfied users",
+                    shouldShowOnboarding: $shouldShowOnboarding
+                )
+                RegularOnboardingView(
+                    image: "onboardingImage-5",
+                    title: "Don't miss new trends",
+                    description: "Allow notifications",
+                    shouldShowOnboarding: $shouldShowOnboarding,
+                    isDismissEnabled: true
+                )
             }
             .tabViewStyle(.page)
             
@@ -51,7 +71,7 @@ struct OnboardingView: View {
 }
 
 #Preview {
-    OnboardingView()
+    OnboardingView(shouldShowOnboarding: .constant(true))
 }
 
 
