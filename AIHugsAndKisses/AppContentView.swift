@@ -10,21 +10,15 @@ import SwiftUI
 struct AppContentView: View {
     var body: some View {
         
-        @AppStorage("__shouldShowOnboarding") var shouldShowOnboarding = true
+        @AppStorage("shouldShowOnboarding") var shouldShowOnboarding = true
         
         ZStack {
+            Color("backgroundPrimaryColor").ignoresSafeArea()
             
-            Color("primaryColor").ignoresSafeArea()
-            
-            VStack {
-                Text("Launch")
-                    .foregroundStyle(.white)
-            }
-            .offset(y: 0)
-            .fullScreenCover(isPresented: $shouldShowOnboarding) {
-                MainView()
-            } content: {
+            if (shouldShowOnboarding) {
                 OnboardingView(shouldShowOnboarding: $shouldShowOnboarding)
+            } else {
+                MainView()
             }
 
         }

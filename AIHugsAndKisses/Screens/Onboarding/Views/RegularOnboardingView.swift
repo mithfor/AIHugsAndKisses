@@ -11,45 +11,39 @@ struct RegularOnboardingView: View {
     let page: OnboardingPage
     
     @Binding var shouldShowOnboarding: Bool
+    @Binding var selection: Int
+    
+    var maxPageNumber: Int
     
     var body: some View {
         ZStack(alignment: .topLeading) {
             
-            Color.primary.ignoresSafeArea()
+            Color("backgroundPrimaryColor").ignoresSafeArea()
             
-            VStack(alignment: .center) {
-                
-                GeometryReader { proxy in
+            VStack(spacing: -12) {
+                VStack {
                     Image(page.imageName)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: proxy.size.width, height: proxy.size.height * 3 / 2)
+                        .padding(.top)
                 }
+                .frame(width: UIScreen.main.bounds.width)
                 
-                
-                OnboardingDescriptionView(
-                    title: page.title,
-                    description: page.description
-                )
-                
-                Button {
-                    page.isDismissEnabled ? shouldShowOnboarding.toggle() : print("Next tapped")
+                VStack {
+                    OnboardingDescriptionView(
+                        title: page.title,
+                        description: page.description
+                    )
+                    .frame(width: UIScreen.main.bounds.width)
+                    
+                    OnboardingNextButton(
+                        shouldShowOnboarding: $shouldShowOnboarding,
+                        selection: $selection,
+                        maxSelection: maxPageNumber
+                    )
+                    .padding(EdgeInsets(top: 16, leading: 8, bottom: 48, trailing: 8))
                 }
-                label: {
-                    Text(page.isDismissEnabled ? "Get Started" : "Next")
-                        .frame(maxWidth: .infinity, maxHeight: 48)
-                        .font(.title3)
-                        .background(Color.button)
-                        .font(.body)
-                        .foregroundStyle(.white)
-                        .cornerRadius(24)
-                }
-                .padding(EdgeInsets(top: 8, leading: 12, bottom: 28, trailing: 12))
             }
-            .padding()
-            .frame(maxWidth: .infinity)
-            .ignoresSafeArea()
-            
         }
     }
 }
@@ -60,8 +54,9 @@ struct RegularOnboardingView: View {
             id: 0,
             imageName: MockOnboardingPage.imageName,
             title: MockOnboardingPage.title,
-            description: MockOnboardingPage.description,
-            isDismissEnabled: false),
-            shouldShowOnboarding: .constant(true)
+            description: MockOnboardingPage.description),
+        shouldShowOnboarding: .constant(true),
+        selection: .constant(0),
+        maxPageNumber: 1
     )
 }

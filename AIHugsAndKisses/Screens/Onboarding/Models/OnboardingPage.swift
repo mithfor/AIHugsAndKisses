@@ -12,5 +12,4 @@ struct OnboardingPage: Identifiable, Hashable {
     var imageName: String
     var title: String
     var description: String
-    var isDismissEnabled: Bool
 }

@@ -12,5 +12,4 @@ struct MockOnboardingPage {
     static let imageName = "onboardingImage-1"
     static let title = "Popular Effects"
     static let description = "Start creating your masterpieces"
-    static let showsDismissButton = false
 }
