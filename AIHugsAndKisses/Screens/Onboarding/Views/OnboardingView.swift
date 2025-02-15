@@ -72,7 +72,6 @@ struct OnboardingView: View {
                     }
                 }
                 .tabViewStyle(.page)
-                .offset(y: -34)
             }
             .frame(
                 minWidth: 0,
